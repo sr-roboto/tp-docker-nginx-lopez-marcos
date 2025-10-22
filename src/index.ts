@@ -1,9 +1,25 @@
 import express from 'express';
+import { DatabaseConnection } from './database/db';
+import { EnvConfiguration } from './configs/env.config';
+import morgan from 'morgan';
+import cors from 'cors';
 
 async function main(): Promise<void> {
   const app = express();
+  const port = EnvConfiguration.PORT;
 
-  app.listen(3000, () => {
+  app.use(cors());
+  app.use(morgan('dev'));
+  app.use(express.json());
+
+  const dbConnection = DatabaseConnection.getInstance();
+  try {
+    await dbConnection.connect();
+  } catch (error) {
+    await dbConnection.disconnect();
+  }
+
+  app.listen(port, () => {
     console.log('Servidor escuchando en el puerto 3000');
   });
 }

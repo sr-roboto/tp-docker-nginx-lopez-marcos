@@ -1,0 +1,33 @@
+services:
+  app:
+    build: .
+    ports:
+      - '${PORT}:${PORT}'
+    depends_on:
+      - mongo
+    env_file:
+      - .env
+    networks:
+      - app-network
+    container_name: TestApp
+
+  mongo:
+    image: mongo:latest
+    restart: always
+    ports:
+      - ${DB_PORT}:${DB_PORT}
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${DB_USER}
+      MONGO_INITDB_ROOT_PASSWORD: ${DB_PASSWORD}
+    container_name: TestDB
+    volumes:
+      - ./mongo-data:/data/db
+    networks:
+      - app-network
+
+volumes:
+  mongo-data:
+
+networks:
+  app-network:
+    driver: bridge
