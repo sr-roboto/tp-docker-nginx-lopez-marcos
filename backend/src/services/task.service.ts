@@ -2,7 +2,6 @@ import { Task } from '../models/task.model';
 import { ITask } from '../interfaces/task.interface';
 
 export class TaskService {
-  // Crear una nueva tarea
   static async create(data: {
     titulo: string;
     descripcion: string;
@@ -17,17 +16,14 @@ export class TaskService {
     return await newTask.save();
   }
 
-  // Obtener todas las tareas
   static async getAll(): Promise<ITask[]> {
     return await Task.find().sort({ createdAt: -1 });
   }
 
-  // Obtener una tarea por ID
   static async getById(id: string): Promise<ITask | null> {
     return await Task.findById(id);
   }
 
-  // Actualizar una tarea
   static async update(
     id: string,
     data: {
@@ -42,7 +38,6 @@ export class TaskService {
     });
   }
 
-  // Eliminar una tarea
   static async delete(id: string): Promise<ITask | null> {
     return await Task.findByIdAndDelete(id);
   }

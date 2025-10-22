@@ -2,7 +2,6 @@ import { Request, Response } from 'express';
 import { TaskService } from '../services/task.service';
 
 export class TaskController {
-  // Crear una nueva tarea
   static async create(req: Request, res: Response): Promise<void> {
     try {
       const { titulo, descripcion, estado } = req.body;
@@ -34,7 +33,6 @@ export class TaskController {
     }
   }
 
-  // Obtener todas las tareas
   static async getAll(req: Request, res: Response): Promise<void> {
     try {
       const tasks = await TaskService.getAll();
@@ -52,7 +50,6 @@ export class TaskController {
     }
   }
 
-  // Obtener una tarea por ID
   static async getById(req: Request, res: Response): Promise<void> {
     try {
       const { id } = req.params;
@@ -86,7 +83,6 @@ export class TaskController {
     }
   }
 
-  // Actualizar una tarea
   static async update(req: Request, res: Response): Promise<void> {
     try {
       const { id } = req.params;
@@ -135,7 +131,6 @@ export class TaskController {
     }
   }
 
-  // Eliminar una tarea
   static async delete(req: Request, res: Response): Promise<void> {
     try {
       const { id } = req.params;
