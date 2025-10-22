@@ -1,6 +1,7 @@
 import express from 'express';
 import { DatabaseConnection } from './database/db';
 import { EnvConfiguration } from './configs/env.config';
+import taskRoutes from './routes/task.route';
 import morgan from 'morgan';
 import cors from 'cors';
 
@@ -19,8 +20,10 @@ async function main(): Promise<void> {
     await dbConnection.disconnect();
   }
 
+  app.use('/api/tasks', taskRoutes);
+
   app.listen(port, () => {
-    console.log('Servidor escuchando en el puerto 3000');
+    console.log(`Servidor escuchando en el puerto ${port}`);
   });
 }
 

@@ -25,7 +25,7 @@ export class DatabaseConnection {
       await mongoose.connect(mongoURI);
       this.connection = mongoose.connection;
 
-      console.log(`MongoDB Connected: ${this.connection.host}`);
+      console.log(`MongoDB conectado: ${this.connection.host}`);
 
       this.connection.on('error', (err: Error) => {
         console.error('MongoDB error de conexión:', err);

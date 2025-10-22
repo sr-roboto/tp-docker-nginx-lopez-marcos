@@ -1,17 +1,17 @@
 services:
-  app:
+  api:
     build: .
     ports:
       - '${PORT}:${PORT}'
     depends_on:
-      - mongo
+      - db
     env_file:
       - .env
     networks:
       - app-network
-    container_name: TestApp
+    container_name: TestApi
 
-  mongo:
+  db:
     image: mongo:latest
     restart: always
     ports:
@@ -19,7 +19,7 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: ${DB_USER}
       MONGO_INITDB_ROOT_PASSWORD: ${DB_PASSWORD}
-    container_name: TestDB
+    container_name: TestDb
     volumes:
       - ./mongo-data:/data/db
     networks:
